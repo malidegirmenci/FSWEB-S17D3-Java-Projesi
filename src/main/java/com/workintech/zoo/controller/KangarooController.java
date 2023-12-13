@@ -2,6 +2,7 @@ package com.workintech.zoo.controller;
 
 import com.workintech.zoo.entity.Gender;
 import com.workintech.zoo.entity.Kangaroo;
+import com.workintech.zoo.validation.ZooValidation;
 import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,24 +27,34 @@ public class KangarooController {
 
     @GetMapping(path="/{id}")
     public Kangaroo getById(@PathVariable("id") Integer id){
+        ZooValidation.isIdValid(id);
+        ZooValidation.checkKangarooExistence(kangaroos,id,true);
         return kangaroos.get(id);
     }
     @PostMapping
     public Kangaroo create(@RequestBody Kangaroo kangaroo){
+        ZooValidation.checkKangarooExistence(kangaroos,kangaroo.getId(),false);
+        ZooValidation.checkWeight(kangaroo.getWeight());
         kangaroos.put(kangaroo.getId(), kangaroo);
         return kangaroos.get(kangaroo.getId());
     }
 
     @DeleteMapping("/{id}")
     public Kangaroo delete(@PathVariable("id") Integer id){
-        Kangaroo removedKangaroo = kangaroos.get(id);
-        kangaroos.remove(id);
-        return removedKangaroo;
+        ZooValidation.isIdValid(id);
+        ZooValidation.checkKangarooExistence(kangaroos,id,true);
+        return kangaroos.remove(id);
     }
 
     @PutMapping("/{id}")
     public Kangaroo update(@PathVariable("id") Integer id, @RequestBody Kangaroo kangaroo){
-        kangaroos.put(id,kangaroo);
-        return kangaroos.get(id);
+        ZooValidation.isIdValid(id);
+        ZooValidation.checkKangarooExistence(kangaroos,id,true);
+        if(kangaroos.containsKey(id)){
+            kangaroos.put(id,kangaroo);
+            return kangaroos.get(id);
+        }else{
+            return create(kangaroo);
+        }
     }
 }

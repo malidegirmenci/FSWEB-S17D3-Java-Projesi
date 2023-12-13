@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Kangaroo {
-    private Long id;
+    private Integer id;
     private String name;
     private Double height;
     private Double weight;

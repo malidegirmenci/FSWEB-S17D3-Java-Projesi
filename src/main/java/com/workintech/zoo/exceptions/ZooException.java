@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
-public class ZooException extends RuntimeException{
+public class ZooException extends RuntimeException {
     private HttpStatus httpStatus;
 
     public ZooException(String message, HttpStatus httpStatus) {

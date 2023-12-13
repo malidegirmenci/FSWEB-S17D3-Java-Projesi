@@ -1,6 +1,5 @@
 package com.workintech.zoo.controller;
 import com.workintech.zoo.entity.Gender;
-import com.workintech.zoo.entity.Kangaroo;
 import com.workintech.zoo.entity.Koala;
 import com.workintech.zoo.validation.ZooValidation;
 import jakarta.annotation.PostConstruct;
@@ -17,7 +16,7 @@ public class KoalaController {
     @PostConstruct
     public void init(){
         this.koalas = new HashMap<>();
-        koalas.put(1,new Koala(1,"Koala Kumpur",65.6,3.5, Gender.MALE));
+        koalas.put(1,new Koala(1,"Koala Kum",65.6,3.5, Gender.MALE));
     }
     @GetMapping
     public List<Koala> getAll(){

@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ZooGlobalExceptionHandler {
     @ExceptionHandler
-    public ResponseEntity<ZooErrorResponse> handleException(ZooException zooException){
-        log.error("ZooException occurred! Exception details: "+zooException.getMessage());
-        ZooErrorResponse zooErrorResponse = new ZooErrorResponse(zooException.getHttpStatus().value(),zooException.getMessage(),System.currentTimeMillis());
-        return new ResponseEntity<>(zooErrorResponse,zooException.getHttpStatus());
+    public ResponseEntity<ZooErrorResponse> handleException(ZooException zooException) {
+        log.error("ZooException occurred! Exception details: " + zooException.getMessage());
+        ZooErrorResponse zooErrorResponse = new ZooErrorResponse(zooException.getHttpStatus().value(), zooException.getMessage(), System.currentTimeMillis());
+        return new ResponseEntity<>(zooErrorResponse, zooException.getHttpStatus());
     }
 
     @ExceptionHandler
-    public ResponseEntity<ZooErrorResponse> handleException(Exception exception){
-        log.error("Exception occurred! Exception details: "+ exception.getMessage());
-        ZooErrorResponse zooErrorResponse = new ZooErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(),exception.getMessage(),System.currentTimeMillis());
-        return new ResponseEntity<>(zooErrorResponse,HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ZooErrorResponse> handleException(Exception exception) {
+        log.error("Exception occurred! Exception details: " + exception.getMessage());
+        ZooErrorResponse zooErrorResponse = new ZooErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage(), System.currentTimeMillis());
+        return new ResponseEntity<>(zooErrorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
